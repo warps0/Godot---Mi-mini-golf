@@ -33,10 +33,16 @@ func check_score() -> void:
 
 func _on_hole_body_entered(body: Node2D) -> void:
 	is_in_hole = true
-	print("Entered!")
 
 
 func _on_hole_body_exited(body: Node2D) -> void:
 	is_in_hole = false
 	scored = false
-	print("Exited!")
+
+
+func _on_sand_body_entered(body: Node2D) -> void:
+	ball.custom_friction = 1500
+
+
+func _on_sand_body_exited(body: Node2D) -> void:
+	ball.custom_friction = 0

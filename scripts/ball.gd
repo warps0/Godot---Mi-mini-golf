@@ -13,6 +13,8 @@ const MAX_SPEED = 500.0
 const MIN_SPEED = 100.0
 const FRICTION = 300
 
+var custom_friction = 0
+
 const HIT = preload("res://sfx/hit_2.ogg")
 
 func _process(_delta: float) -> void:
@@ -62,4 +64,4 @@ func _physics_process(delta: float) -> void:
 		emit_signal("ball_hitted", HIT)
 		velocity = velocity.bounce(collision.get_normal())
 	
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION + custom_friction) * delta)
