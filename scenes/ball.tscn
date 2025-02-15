@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqkg0ee1i3jf6"]
+
+[ext_resource type="Texture2D" uid="uid://cmyuhjlrxhgme" path="res://sprites/ball_1.png" id="1_bq7qn"]
+[ext_resource type="Script" path="res://scripts/ball.gd" id="1_e8y10"]
+[ext_resource type="Texture2D" uid="uid://dphr4d2sy8skf" path="res://sprites/marker.png" id="2_bipew"]
+[ext_resource type="Texture2D" uid="uid://diog3p48voflg" path="res://sprites/ball_2.png" id="3_e8slv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_um8q7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bq7qn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e8slv")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bq7qn")
+}],
+"loop": true,
+"name": &"still",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3jlev"]
+radius = 16.0312
+
+[node name="Ball" type="CharacterBody2D"]
+position = Vector2(71, 78)
+script = ExtResource("1_e8y10")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_um8q7")
+animation = &"still"
+autoplay = "still"
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_3jlev")
+
+[node name="Marker" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bipew")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -16)
