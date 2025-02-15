@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqkg0ee1i3jf6"]
+[gd_scene load_steps=11 format=3 uid="uid://df3bfqo5mu12a"]
 
 [ext_resource type="Texture2D" uid="uid://cmyuhjlrxhgme" path="res://sprites/ball_1.png" id="1_bq7qn"]
 [ext_resource type="Script" path="res://scripts/ball.gd" id="1_e8y10"]
@@ -30,10 +30,24 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3jlev"]
 radius = 16.0312
 
+[sub_resource type="Gradient" id="Gradient_didee"]
+offsets = PackedFloat32Array(0, 0.392857, 0.673469, 0.994898)
+colors = PackedColorArray(0, 1, 0, 1, 1, 1, 0, 1, 1, 0.537255, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c6htm"]
+gradient = SubResource("Gradient_didee")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lpkf5"]
+texture = SubResource("GradientTexture2D_c6htm")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1layk"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+
 [node name="Ball" type="CharacterBody2D"]
 position = Vector2(71, 78)
 script = ExtResource("1_e8y10")
-metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -50,5 +64,15 @@ position = Vector2(0, -9)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_bipew")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, -16)
+[node name="PowerBar" type="ProgressBar" parent="."]
+texture_filter = 1
+offset_left = 26.0
+offset_top = -16.0
+offset_right = 31.0
+offset_bottom = 14.0
+theme_override_styles/background = SubResource("StyleBoxTexture_lpkf5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1layk")
+step = 1.0
+value = 100.0
+fill_mode = 2
+show_percentage = false
