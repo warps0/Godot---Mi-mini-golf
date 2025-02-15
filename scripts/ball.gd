@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal ball_stopped
+signal ball_hitted(sound)
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var hitbox: CollisionShape2D = $Hitbox
@@ -12,13 +13,16 @@ const MAX_SPEED = 500.0
 const MIN_SPEED = 100.0
 const FRICTION = 300
 
+const HIT = preload("res://sfx/hit_2.ogg")
 
 func _process(_delta: float) -> void:
-	if Input.is_action_pressed("ui_accept") and velocity == Vector2(0, 0):
+	if Input.is_action_pressed("action") and velocity == Vector2(0, 0):
 		power_bar.value -= power_bar.step
 		if power_bar.value <= 0:
 			power_bar.value = 100
-	if Input.is_action_just_released("ui_accept") and velocity == Vector2(0, 0):
+	
+	if Input.is_action_just_released("action") and velocity == Vector2(0, 0):
+		emit_signal("ball_hitted", HIT)
 		var shoot_speed = (100.0 - power_bar.value) * 5.0
 		
 		if shoot_speed < 100.0:
@@ -26,7 +30,6 @@ func _process(_delta: float) -> void:
 		
 		velocity = (marker.position - sprite.position).normalized() * shoot_speed
 		power_bar.value = 100
-		print(shoot_speed)
 	
 	if velocity == Vector2(0, 0):
 		sprite.animation = "still"
@@ -56,6 +59,7 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
 	
 	if collision:
+		emit_signal("ball_hitted", HIT)
 		velocity = velocity.bounce(collision.get_normal())
 	
 	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)

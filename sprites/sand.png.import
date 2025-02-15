@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfwlqtxet8cy"
-path="res://.godot/imported/tile_sheet.png-4153699194b21196fbc96081fe635bdb.ctex"
+uid="uid://bovatepgnkdiq"
+path="res://.godot/imported/sand.png-68817257f4378845f7bd8880c3a0ed78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tile_sheet.png"
-dest_files=["res://.godot/imported/tile_sheet.png-4153699194b21196fbc96081fe635bdb.ctex"]
+source_file="res://sprites/sand.png"
+dest_files=["res://.godot/imported/sand.png-68817257f4378845f7bd8880c3a0ed78.ctex"]
 
 [params]
 
