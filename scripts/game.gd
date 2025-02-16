@@ -15,6 +15,17 @@ func _process(delta: float) -> void:
 	pass
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("restart"):
+		var temp = load("res://scenes/levels/level"+ str(n_level) +".tscn")
+		next_level = temp.instantiate()
+		call_deferred("add_child", next_level)
+		
+		current_level.queue_free()
+		current_level = next_level
+		current_level.connect("level_finished", handle_change_level)
+
+
 func handle_change_level() -> void:
 	var dir = DirAccess.open("res://scenes/levels/")
 	var max_levels = dir.get_files()

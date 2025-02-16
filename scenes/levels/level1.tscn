@@ -92,6 +92,9 @@ position = Vector2(142, 331)
 sprite_frames = SubResource("SpriteFrames_lxha8")
 animation = &"splash"
 
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="Ball" parent="." instance=ExtResource("3_vv4va")]
 position = Vector2(320, 344)
 floor_stop_on_slope = false
