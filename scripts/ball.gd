@@ -21,6 +21,9 @@ var enabled: bool = true
 const HIT = preload("res://sfx/hit_2.ogg")
 
 func _process(_delta: float) -> void:
+	handle_ui()
+	handle_anims()
+	
 	if enabled:
 		if Input.is_action_pressed("action") and velocity == Vector2(0, 0):
 			power_bar.value -= power_bar.step
@@ -39,14 +42,7 @@ func _process(_delta: float) -> void:
 		
 		if velocity == Vector2(0, 0):
 			last_position = position
-			sprite.animation = "still"
-			marker.show()
-			power_bar.show()
 			ball_stopped.emit()
-		else:
-			sprite.animation = "moving"
-			power_bar.hide()
-			marker.hide()
 		
 		if marker.visible:
 			var perimeter_radius: float = 16.0
@@ -61,6 +57,21 @@ func _process(_delta: float) -> void:
 			marker.global_rotation_degrees = rad_to_deg(mouse_dir.angle()) + 90
 
 
+func handle_anims() -> void:
+	if enabled:
+		if velocity == Vector2(0, 0) or !enabled:
+			sprite.animation = "still"
+		else:
+			sprite.animation = "moving"
+
+
+func handle_ui() -> void:
+	if velocity == Vector2(0, 0) and enabled:
+		marker.show()
+		power_bar.show()
+	else:
+		marker.hide()
+		power_bar.hide()
 
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
