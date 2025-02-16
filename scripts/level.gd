@@ -16,6 +16,7 @@ var total_time
 const SCORE_SOUND = preload("res://sfx/score.ogg")
 const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
 
+
 @onready var sfx: AudioStreamPlayer2D = $SFX
 @onready var sfx_2: AudioStreamPlayer2D = $SFX2
 @onready var sfx_3: AudioStreamPlayer2D = $SFX3
@@ -25,16 +26,19 @@ const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
 
 @onready var respawn_timer: Timer = $RespawnTimer
 
+
 func _ready() -> void:
 	ball.connect("ball_stopped", handle_hit)
 	ball.connect("ball_hitted", play_sound)
+
+
 	ball.show()
 	start_time = Time.get_ticks_msec()
 
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_released("restart"):
-		get_tree().reload_current_scene()
+func handle_hit(sound) -> void:
+	hits += 1
+	play_sound(sound)
 
 
 func handle_hit(sound) -> void:
@@ -101,6 +105,9 @@ func _on_sand_body_exited(body: Node2D) -> void:
 
 func _on_water_body_entered(body: Node2D) -> void:
 	if body == ball:
+		respawn_timer.start()
+		await respawn_timer.timeout
+		
 		ball.disable()
 		water_splash.position = ball.position
 		water_splash.show()
