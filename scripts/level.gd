@@ -1,5 +1,7 @@
 extends Node2D
 
+signal level_finished
+
 @onready var ball: CharacterBody2D = $Ball
 @onready var hole: Area2D = $Hole
 
@@ -12,6 +14,7 @@ const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
 @onready var sfx: AudioStreamPlayer2D = $SFX
 @onready var sfx_2: AudioStreamPlayer2D = $SFX2
 @onready var sfx_3: AudioStreamPlayer2D = $SFX3
+@onready var sfx_end: AudioStreamPlayer2D = $SFXEnd
 
 @onready var water_splash: AnimatedSprite2D = $WaterSplash
 
@@ -20,7 +23,6 @@ func _ready() -> void:
 	ball.connect("ball_stopped", check_score)
 	ball.connect("ball_hitted", play_sound)
 	ball.show()
-	print(ball.position)
 
 
 func _input(_event: InputEvent) -> void:
@@ -42,9 +44,12 @@ func play_sound(sound: AudioStream) -> void:
 
 func check_score() -> void:
 	if is_in_hole and !scored:
-		play_sound(SCORE_SOUND)
+		sfx_end.stream = SCORE_SOUND
+		sfx_end.play()
 		ball.position = hole.position
 		scored = true
+		
+		await  sfx_end.finished
 
 
 func _on_hole_body_entered(_body: Node2D) -> void:

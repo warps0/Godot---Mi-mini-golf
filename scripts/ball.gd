@@ -24,7 +24,7 @@ func _process(_delta: float) -> void:
 	if enabled:
 		if Input.is_action_pressed("action") and velocity == Vector2(0, 0):
 			power_bar.value -= power_bar.step
-			if power_bar.value < 0:
+			if power_bar.value == 0:
 				power_bar.value = 100
 		
 		if Input.is_action_just_released("action") and velocity == Vector2(0, 0):
@@ -59,6 +59,7 @@ func _process(_delta: float) -> void:
 			
 			marker.global_transform.origin = mouse_pos
 			marker.global_rotation_degrees = rad_to_deg(mouse_dir.angle()) + 90
+
 
 
 func _physics_process(delta: float) -> void:
