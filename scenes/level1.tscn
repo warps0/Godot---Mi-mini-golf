@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://bddn0b6cgrx58"]
+[gd_scene load_steps=14 format=4 uid="uid://bddn0b6cgrx58"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_nfkok"]
 [ext_resource type="Texture2D" uid="uid://cfwlqtxet8cy" path="res://sprites/tile_sheet.png" id="1_ojmb6"]
 [ext_resource type="Texture2D" uid="uid://dmkrt57y8l2v7" path="res://sprites/hole.png" id="2_3tyt5"]
 [ext_resource type="PackedScene" uid="uid://df3bfqo5mu12a" path="res://scenes/ball.tscn" id="3_vv4va"]
+[ext_resource type="Texture2D" uid="uid://phv16ass0ipi" path="res://sprites/water_splash_1.png" id="4_xek4u"]
+[ext_resource type="Texture2D" uid="uid://w1cdgpv88xv0" path="res://sprites/water_splash_2.png" id="5_5u6sm"]
+[ext_resource type="Texture2D" uid="uid://bg4n5khgqsivk" path="res://sprites/water_splash_4.png" id="6_f1igl"]
+[ext_resource type="Texture2D" uid="uid://cbqnkmebqkxup" path="res://sprites/water_splash_3.png" id="7_esltk"]
+[ext_resource type="Texture2D" uid="uid://5l2xj3veah7b" path="res://sprites/water_splash_5.png" id="8_sms6g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dsc5v"]
 texture = ExtResource("1_ojmb6")
@@ -32,6 +37,29 @@ sources/0 = SubResource("TileSetAtlasSource_dsc5v")
 [sub_resource type="CircleShape2D" id="CircleShape2D_28stg"]
 radius = 8.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxha8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_xek4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5u6sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f1igl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_esltk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sms6g")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_nfkok")
 
@@ -50,12 +78,22 @@ texture = ExtResource("2_3tyt5")
 scale = Vector2(0.25, 0.25)
 shape = SubResource("CircleShape2D_28stg")
 
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+
+[node name="SFX2" type="AudioStreamPlayer2D" parent="."]
+
+[node name="SFX3" type="AudioStreamPlayer2D" parent="."]
+
+[node name="WaterSplash" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(142, 331)
+sprite_frames = SubResource("SpriteFrames_lxha8")
+animation = &"splash"
+
 [node name="Ball" parent="." instance=ExtResource("3_vv4va")]
 position = Vector2(320, 344)
 floor_stop_on_slope = false
 floor_block_on_wall = false
-
-[node name="SFX" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
 [connection signal="body_exited" from="Hole" to="." method="_on_hole_body_exited"]

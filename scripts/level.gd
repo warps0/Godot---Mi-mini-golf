@@ -30,25 +30,21 @@ func _input(_event: InputEvent) -> void:
 
 func play_sound(sound: AudioStream) -> void:
 	if sfx.playing:
-		print("SFX2")
 		sfx_2.stream = sound
 		sfx_2.play()
 	elif sfx_2.playing:
-		print("SFX3")
 		sfx_3.stream = sound
 		sfx_3.play()
 	else:
-		print("SFX")
 		sfx.stream = sound
 		sfx.play()
+
 
 func check_score() -> void:
 	if is_in_hole and !scored:
 		play_sound(SCORE_SOUND)
 		ball.position = hole.position
 		scored = true
-	else:
-		pass
 
 
 func _on_hole_body_entered(_body: Node2D) -> void:

@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://d4jr376q5w0ib"]
+[gd_scene load_steps=14 format=4 uid="uid://d4jr376q5w0ib"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_2ppol"]
 [ext_resource type="Texture2D" uid="uid://cfwlqtxet8cy" path="res://sprites/tile_sheet.png" id="2_tu488"]
 [ext_resource type="Texture2D" uid="uid://dmkrt57y8l2v7" path="res://sprites/hole.png" id="3_4snhv"]
+[ext_resource type="Texture2D" uid="uid://phv16ass0ipi" path="res://sprites/water_splash_1.png" id="4_0vuet"]
 [ext_resource type="PackedScene" uid="uid://df3bfqo5mu12a" path="res://scenes/ball.tscn" id="4_v0rg2"]
+[ext_resource type="Texture2D" uid="uid://w1cdgpv88xv0" path="res://sprites/water_splash_2.png" id="5_yvmyh"]
+[ext_resource type="Texture2D" uid="uid://bg4n5khgqsivk" path="res://sprites/water_splash_4.png" id="6_rnh7h"]
+[ext_resource type="Texture2D" uid="uid://cbqnkmebqkxup" path="res://sprites/water_splash_3.png" id="7_n3be0"]
+[ext_resource type="Texture2D" uid="uid://5l2xj3veah7b" path="res://sprites/water_splash_5.png" id="8_0u142"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dsc5v"]
 texture = ExtResource("2_tu488")
@@ -32,6 +37,29 @@ sources/0 = SubResource("TileSetAtlasSource_dsc5v")
 [sub_resource type="CircleShape2D" id="CircleShape2D_28stg"]
 radius = 8.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_b8qpt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0vuet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yvmyh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rnh7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_n3be0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0u142")
+}],
+"loop": false,
+"name": &"splash",
+"speed": 5.0
+}]
+
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_2ppol")
 
@@ -50,12 +78,11 @@ texture = ExtResource("3_4snhv")
 scale = Vector2(0.25, 0.25)
 shape = SubResource("CircleShape2D_28stg")
 
-[node name="Ball" parent="." instance=ExtResource("4_v0rg2")]
-position = Vector2(472, 360)
-floor_stop_on_slope = false
-floor_block_on_wall = false
-
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
+
+[node name="SFX2" type="AudioStreamPlayer2D" parent="."]
+
+[node name="SFX3" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -71,6 +98,17 @@ polygon = PackedVector2Array(160, 232, 168, 248, 184, 256, 200, 256, 216, 248, 2
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Obstacles/Sand"]
 position = Vector2(160, 32)
 polygon = PackedVector2Array(160, 232, 152, 248, 136, 256, 120, 256, 104, 264, 96, 280, 96, 296, 104, 312, 120, 320, 128, 320, 136, 320, 152, 312, 160, 296, 160, 280, 168, 264, 184, 256, 200, 256, 216, 248, 224, 232, 224, 216, 216, 200, 200, 192, 184, 192, 168, 200, 160, 216)
+
+[node name="WaterSplash" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(142, 331)
+sprite_frames = SubResource("SpriteFrames_b8qpt")
+animation = &"splash"
+
+[node name="Ball" parent="." instance=ExtResource("4_v0rg2")]
+position = Vector2(472, 360)
+floor_stop_on_slope = false
+floor_block_on_wall = false
 
 [connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
 [connection signal="body_exited" from="Hole" to="." method="_on_hole_body_exited"]
