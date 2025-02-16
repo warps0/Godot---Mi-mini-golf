@@ -91,7 +91,7 @@ shape = SubResource("CircleShape2D_28stg")
 [node name="Water" type="Area2D" parent="Obstacles"]
 
 [node name="Collision" type="CollisionPolygon2D" parent="Obstacles/Water"]
-polygon = PackedVector2Array(147, 286, 148, 353, 176, 375, 130, 375, 128, 257, 172, 260)
+polygon = PackedVector2Array(160, 287, 153, 288, 153, 352, 159, 354, 178, 375, 130, 375, 128, 257, 177, 268)
 
 [node name="WaterSplash" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -100,6 +100,9 @@ sprite_frames = SubResource("SpriteFrames_k2lkl")
 animation = &"splash"
 frame = 4
 frame_progress = 1.0
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 0.1
 
 [node name="Ball" parent="." instance=ExtResource("4_apl2u")]
 position = Vector2(241, 368)
