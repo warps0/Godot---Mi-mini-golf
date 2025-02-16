@@ -36,10 +36,6 @@ func _ready() -> void:
 	start_time = Time.get_ticks_msec()
 
 
-func handle_hit(sound) -> void:
-	hits += 1
-	play_sound(sound)
-
 
 func handle_hit(sound) -> void:
 	hits += 1
