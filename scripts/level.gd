@@ -28,8 +28,10 @@ const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
 
 
 func _ready() -> void:
-	ball.connect("ball_stopped", check_score)
-	ball.connect("ball_hitted", handle_hit)
+	ball.connect("ball_stopped", handle_hit)
+	ball.connect("ball_hitted", play_sound)
+
+
 	ball.show()
 	start_time = Time.get_ticks_msec()
 
@@ -37,6 +39,12 @@ func _ready() -> void:
 func handle_hit(sound) -> void:
 	hits += 1
 	play_sound(sound)
+
+
+func handle_hit(sound) -> void:
+	hits += 1
+	play_sound(sound)
+
 
 func play_sound(sound: AudioStream) -> void:
 	if sfx.playing:
