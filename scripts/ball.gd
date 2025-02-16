@@ -8,6 +8,7 @@ signal ball_hitted(sound)
 
 @onready var marker: Sprite2D = $Marker
 @onready var power_bar: ProgressBar = $PowerBar
+@onready var coyote_jump: Timer = $CoyoteJump
 
 const MAX_SPEED = 500.0
 const MIN_SPEED = 100.0
@@ -20,22 +21,28 @@ var enabled: bool = true
 
 const HIT = preload("res://sfx/hit_2.ogg")
 
+var hits = 0
+
 func _process(_delta: float) -> void:
 	handle_ui()
 	handle_anims()
 	
 	if enabled:
-		if Input.is_action_pressed("action") and velocity == Vector2(0, 0):
+		if Input.is_action_pressed("action") and velocity == Vector2(0, 0) and coyote_jump.is_stopped():
 			power_bar.value -= power_bar.step
-			if power_bar.value == 0:
+			if power_bar.value <= 0:
+				coyote_jump.start()
+				await coyote_jump.timeout
 				power_bar.value = 100
+				coyote_jump.stop()
 		
 		if Input.is_action_just_released("action") and velocity == Vector2(0, 0):
 			ball_hitted.emit(HIT)
+			hits += 1
 			var shoot_speed = (100.0 - power_bar.value) * 5.0
 			
-			if shoot_speed < 100.0:
-				shoot_speed = 100.0
+			if shoot_speed < 85.0:
+				shoot_speed = 85.0
 			
 			velocity = (marker.position - sprite.position).normalized() * shoot_speed
 			power_bar.value = 100
