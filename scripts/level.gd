@@ -34,7 +34,6 @@ func _ready() -> void:
 	ball.pause()
 	
 	level_entered.wait_time = 0.25
-	print(level_entered.wait_time)
 	level_entered.start()
 	await level_entered.timeout
 	
