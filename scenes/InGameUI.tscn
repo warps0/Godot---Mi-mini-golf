@@ -14,7 +14,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ahyve"]
-content_margin_top = 5.0
+content_margin_top = 20.0
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_bl5la")
@@ -104,7 +104,7 @@ size_flags_vertical = 0
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ahyve")
-text = "Highscore!"
+text = "Game Over"
 
 [node name="PlayerInfo" type="VBoxContainer" parent="HighScorePanel"]
 layout_mode = 2
