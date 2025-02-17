@@ -5,7 +5,7 @@ var next_state = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	current_state.connect("start_game", handle_change_state)
+	current_state.connect("change_state", handle_change_state)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,3 +20,4 @@ func  handle_change_state(to_state) -> void:
 	
 	current_state.queue_free()
 	current_state = next_state
+	current_state.connect("change_state", handle_change_state)

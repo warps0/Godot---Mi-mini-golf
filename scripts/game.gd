@@ -1,5 +1,7 @@
 extends Node
 
+signal change_state(to_state)
+
 @onready var current_level = $Level1
 var next_level = null
 
@@ -20,6 +22,7 @@ func _ready() -> void:
 	var dir = DirAccess.open("res://scenes/levels/")
 	max_levels = dir.get_files()
 	current_level.connect("level_finished", handle_change_level)
+	ui.connect("high_score_panel_closed", handle_end_game)
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -58,13 +61,17 @@ func handle_change_level() -> void:
 func change_level() -> void:
 	if n_level < max_levels.size():
 		n_level += 1
+		var temp = load("res://scenes/levels/level"+ str(n_level) +".tscn")
+		next_level = temp.instantiate()
+		call_deferred("add_child", next_level)
+	
+		current_level.queue_free()
+		current_level = next_level
+		current_level.connect("level_finished", handle_change_level)
 	else:
-		n_level = 1
-	
-	var temp = load("res://scenes/levels/level"+ str(n_level) +".tscn")
-	next_level = temp.instantiate()
-	call_deferred("add_child", next_level)
-	
-	current_level.queue_free()
-	current_level = next_level
-	current_level.connect("level_finished", handle_change_level)
+		ui.show_high_score_panel()
+
+
+func handle_end_game(p_name: String) -> void:
+	print(p_name)
+	change_state.emit("m_menu")
