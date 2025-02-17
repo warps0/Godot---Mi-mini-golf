@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://sprites/_ball_1.png"
 
+[autoload]
+
+Global="*res://data/global.gd"
+
 [display]
 
 window/size/viewport_width=640

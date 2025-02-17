@@ -80,3 +80,54 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/outline_size = 2
 text = "Press 'Click' to continue"
+
+[node name="HighScorePanel" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(200, 240)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p6xuk")
+
+[node name="Highscore" type="Label" parent="HighScorePanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ahyve")
+text = "Highscore!"
+
+[node name="PlayerInfo" type="VBoxContainer" parent="HighScorePanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="EnterName" type="Label" parent="HighScorePanel/PlayerInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 2
+text = "Enter your name:"
+
+[node name="PlayerName" type="LineEdit" parent="HighScorePanel/PlayerInfo"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+caret_blink = true
+
+[node name="ConfirmButton" type="Button" parent="HighScorePanel/PlayerInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/outline_size = 2
+text = "Confirm"
+
+[connection signal="pressed" from="HighScorePanel/PlayerInfo/ConfirmButton" to="." method="_on_confirm_button_pressed"]

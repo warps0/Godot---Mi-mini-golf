@@ -31,7 +31,10 @@ func _ready() -> void:
 	ball.connect("ball_stopped", check_score)
 	ball.connect("ball_hitted", handle_hit)
 	
-	level_entered.start(0.3)
+	ball.pause()
+	
+	level_entered.wait_time = 0.25
+	level_entered.start()
 	await level_entered.timeout
 	
 	ball.unpause()
@@ -73,13 +76,15 @@ func check_score() -> void:
 		level_finished.emit()
 
 
-func _on_hole_body_entered(_body: Node2D) -> void:
-	is_in_hole = true
+func _on_hole_body_entered(body: Node2D) -> void:
+	if body == ball:
+		is_in_hole = true
 
 
-func _on_hole_body_exited(_body: Node2D) -> void:
-	is_in_hole = false
-	scored = false
+func _on_hole_body_exited(body: Node2D) -> void:
+	if body == ball:
+		is_in_hole = false
+		scored = false
 
 
 func _on_sand_body_entered(body: Node2D) -> void:

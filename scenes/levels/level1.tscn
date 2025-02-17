@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cbqnkmebqkxup" path="res://sprites/water_splash_3.png" id="7_esltk"]
 [ext_resource type="Texture2D" uid="uid://5l2xj3veah7b" path="res://sprites/water_splash_5.png" id="8_sms6g"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dsc5v"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f4jwr"]
 texture = ExtResource("1_ojmb6")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -32,7 +32,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_pqvyc"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_dsc5v")
+sources/0 = SubResource("TileSetAtlasSource_f4jwr")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_28stg"]
 radius = 8.0
