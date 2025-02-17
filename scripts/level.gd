@@ -7,6 +7,7 @@ signal level_finished
 
 var is_in_hole: bool = false
 var scored: bool = false
+var playing: bool = true
 
 @export var par: int
 var start_time
@@ -14,7 +15,6 @@ var total_time
 
 const SCORE_SOUND = preload("res://sfx/score.ogg")
 const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
-
 
 @onready var sfx: AudioStreamPlayer2D = $SFX
 @onready var sfx_2: AudioStreamPlayer2D = $SFX2
@@ -24,14 +24,17 @@ const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
 @onready var water_splash: AnimatedSprite2D = $WaterSplash
 
 @onready var respawn_timer: Timer = $RespawnTimer
+@onready var level_entered: Timer = $LevelEntered
 
 
 func _ready() -> void:
 	ball.connect("ball_stopped", check_score)
 	ball.connect("ball_hitted", handle_hit)
-
-
-	ball.show()
+	
+	level_entered.start(0.3)
+	await level_entered.timeout
+	
+	ball.unpause()
 	start_time = Time.get_ticks_msec()
 
 
@@ -52,27 +55,16 @@ func play_sound(sound: AudioStream) -> void:
 		sfx.play()
 
 
-func get_time(total_time) -> void:
-	var hours = (total_time / 3600000) % 24
-	var minutes = (total_time / 60000) % 60
-	var seconds = (total_time / 1000) % 60
-	var miliseconds = total_time % 1000
-	
-	print("%sH:%sM:%sS:%sms" % [hours,minutes,seconds,miliseconds])
-
-
 func check_score() -> void:
 	if is_in_hole and !scored:
+		playing = false
 		sfx_end.stream = SCORE_SOUND
 		sfx_end.play()
 		ball.position = hole.position
 		
-		ball.disable()
-		ball.show()
+		ball.pause()
 		
 		total_time = Time.get_ticks_msec() - start_time
-		get_time(total_time)
-		print(ball.hits)
 		
 		scored = true
 		
@@ -105,7 +97,8 @@ func _on_water_body_entered(body: Node2D) -> void:
 		respawn_timer.start()
 		await respawn_timer.timeout
 		
-		ball.disable()
+		ball.pause()
+		ball.hide()
 		water_splash.position = ball.position
 		water_splash.show()
 		water_splash.play()
@@ -114,4 +107,4 @@ func _on_water_body_entered(body: Node2D) -> void:
 		await water_splash.animation_finished
 		
 		water_splash.hide()
-		ball.enable()
+		ball.respawn()
