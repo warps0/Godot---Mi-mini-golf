@@ -16,6 +16,7 @@ const FRICTION = 300
 
 var custom_friction = 0
 var last_position: Vector2
+var pause_velocity: Vector2 = Vector2.ZERO
 
 var enabled: bool = true
 
@@ -23,12 +24,16 @@ const HIT = preload("res://sfx/hit_2.ogg")
 
 var hits = 0
 
+func _ready() -> void:
+	pause()
+
+
 func _process(_delta: float) -> void:
 	handle_ui()
 	handle_anims()
 	
 	if enabled:
-		if Input.is_action_pressed("action") and velocity == Vector2(0, 0) and coyote_jump.is_stopped():
+		if Input.is_action_pressed("action") and velocity == Vector2.ZERO and coyote_jump.is_stopped():
 			power_bar.value -= power_bar.step
 			if power_bar.value <= 0:
 				coyote_jump.start()
@@ -36,7 +41,7 @@ func _process(_delta: float) -> void:
 				power_bar.value = 100
 				coyote_jump.stop()
 		
-		if Input.is_action_just_released("action") and velocity == Vector2(0, 0):
+		if Input.is_action_just_released("action") and velocity == Vector2.ZERO:
 			ball_hitted.emit(HIT)
 			hits += 1
 			var shoot_speed = (100.0 - power_bar.value) * 5.0
@@ -47,7 +52,7 @@ func _process(_delta: float) -> void:
 			velocity = (marker.position - sprite.position).normalized() * shoot_speed
 			power_bar.value = 100
 		
-		if velocity == Vector2(0, 0):
+		if velocity == Vector2.ZERO:
 			last_position = position
 			ball_stopped.emit()
 		
@@ -66,19 +71,20 @@ func _process(_delta: float) -> void:
 
 func handle_anims() -> void:
 	if enabled:
-		if velocity == Vector2(0, 0) or !enabled:
+		if velocity == Vector2.ZERO or !enabled:
 			sprite.animation = "still"
 		else:
 			sprite.animation = "moving"
 
 
 func handle_ui() -> void:
-	if velocity == Vector2(0, 0) and enabled:
+	if velocity == Vector2.ZERO and enabled:
 		marker.show()
 		power_bar.show()
 	else:
 		marker.hide()
 		power_bar.hide()
+
 
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
@@ -94,14 +100,19 @@ func set_custom_friction(value: int) -> void:
 	custom_friction = value
 
 
-func enable() -> void:
-	enabled = true
+func respawn() -> void:
 	position = last_position
-	velocity = Vector2(0, 0)
+	velocity = Vector2.ZERO
+	enabled = true
 	show()
-	set_custom_friction(0)
 
-func disable() -> void:
-	velocity = Vector2(0, 0)
+
+func pause() -> void:
+	pause_velocity = velocity
+	velocity = Vector2.ZERO
 	enabled = false
-	hide()
+
+
+func unpause() -> void:
+	velocity = pause_velocity
+	enabled = true
