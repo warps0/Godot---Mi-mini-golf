@@ -20,7 +20,6 @@ func _ready() -> void:
 	var dir = DirAccess.open("res://scenes/levels/")
 	max_levels = dir.get_files()
 	current_level.connect("level_finished", handle_change_level)
-	current_level.ball.unpause()
 
 
 func _unhandled_input(_event: InputEvent) -> void:
