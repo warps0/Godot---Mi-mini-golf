@@ -8,16 +8,16 @@ var next_level = null
 var n_level = 1
 var max_levels
 
-var start_run_time
-var total_run_time
-var partial_run_time = 0
+var total_run_time = 0
 var current_level_time
 
 var score = 0
 
+var restarted: bool = false
+
 @onready var ui: CanvasLayer = $InGameUI
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	var dir = DirAccess.open("res://scenes/levels/")
 	max_levels = dir.get_files()
@@ -27,6 +27,7 @@ func _ready() -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("restart") and current_level.playing:
+		restarted = true
 		var temp = load("res://scenes/levels/level"+ str(n_level) +".tscn")
 		next_level = temp.instantiate()
 		call_deferred("add_child", next_level)
@@ -47,7 +48,7 @@ func calc_score(hits: int) -> int:
 
 func handle_change_level() -> void:
 	current_level_time = current_level.total_time
-	partial_run_time += current_level_time
+	total_run_time += current_level_time
 	
 	score += calc_score(current_level.ball.hits)
 	
@@ -73,5 +74,12 @@ func change_level() -> void:
 
 
 func handle_end_game(p_name: String) -> void:
-	print(p_name)
+	# Here I obtain the player name and should check if total run time is lower
+	# than the any top of ladder to add
+	# Same with score
+	# Take in count total run time and score is local to this script
+	if !restarted:
+		Global.save_data.save_best_scores([score, p_name])
+		Global.save_data.save_best_times([total_run_time, p_name])
+		Global.save_data.save()
 	change_state.emit("m_menu")

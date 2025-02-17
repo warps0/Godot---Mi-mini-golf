@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_0spk2"]
 [ext_resource type="Texture2D" uid="uid://b1q6q3nph0kw0" path="res://sprites/mm_bg.png" id="1_k3pf6"]
 
-[node name="M_menu" type="Node"]
+[node name="MainMenu" type="Node"]
 script = ExtResource("1_0spk2")
 
 [node name="UI" type="Control" parent="."]
@@ -44,7 +44,7 @@ grow_vertical = 0
 layout_mode = 2
 text = "Play"
 
-[node name="HightScoresButton" type="Button" parent="UI/OptionsBox"]
+[node name="HighScoresButton" type="Button" parent="UI/OptionsBox"]
 layout_mode = 2
 text = "High Scores"
 
@@ -57,3 +57,5 @@ layout_mode = 2
 text = "Quit"
 
 [connection signal="pressed" from="UI/OptionsBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="UI/OptionsBox/HighScoresButton" to="." method="_on_high_scores_button_pressed"]
+[connection signal="pressed" from="UI/OptionsBox/QuitButton" to="." method="_on_quit_button_pressed"]

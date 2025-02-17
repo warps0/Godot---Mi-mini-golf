@@ -8,11 +8,6 @@ func _ready() -> void:
 	current_state.connect("change_state", handle_change_state)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func  handle_change_state(to_state) -> void:
 	var temp = load("res://scenes/"+ to_state +".tscn")
 	next_state = temp.instantiate()

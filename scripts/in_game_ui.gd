@@ -46,7 +46,4 @@ func get_str_time(level_time: int) -> String:
 
 func _on_confirm_button_pressed() -> void:
 	if player_name.text.length() > 0 and player_name.text.length() < 11:
-		print(player_name.text)
 		high_score_panel_closed.emit(player_name.text)
-	else:
-		pass
