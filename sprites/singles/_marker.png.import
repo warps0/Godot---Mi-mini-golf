@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0do6p42iaba8"
-path="res://.godot/imported/wall_corner_out.png-404e4c314cd773a0556903f3534a7844.ctex"
+uid="uid://8667xym2qxdk"
+path="res://.godot/imported/_marker.png-85fad05becd29b9d46ccc11cb920663a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/wall_corner_out.png"
-dest_files=["res://.godot/imported/wall_corner_out.png-404e4c314cd773a0556903f3534a7844.ctex"]
+source_file="res://sprites/singles/_marker.png"
+dest_files=["res://.godot/imported/_marker.png-85fad05becd29b9d46ccc11cb920663a.ctex"]
 
 [params]
 

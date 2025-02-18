@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmyuhjlrxhgme"
-path="res://.godot/imported/ball_1.png-28e2c7b7b1f1a544ffd87ef90f4cdfac.ctex"
+uid="uid://bg4n5khgqsivk"
+path="res://.godot/imported/water_splash_4.png-be9c383c186ee948bf3684fa26975808.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ball_1.png"
-dest_files=["res://.godot/imported/ball_1.png-28e2c7b7b1f1a544ffd87ef90f4cdfac.ctex"]
+source_file="res://sprites/singles/water_splash_4.png"
+dest_files=["res://.godot/imported/water_splash_4.png-be9c383c186ee948bf3684fa26975808.ctex"]
 
 [params]
 

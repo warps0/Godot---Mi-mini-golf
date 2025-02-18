@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://df3bfqo5mu12a"]
 
-[ext_resource type="Texture2D" uid="uid://cmyuhjlrxhgme" path="res://sprites/ball_1.png" id="1_bq7qn"]
+[ext_resource type="Texture2D" uid="uid://cmyuhjlrxhgme" path="res://sprites/singles/ball_1.png" id="1_bq7qn"]
 [ext_resource type="Script" path="res://scripts/ball.gd" id="1_e8y10"]
-[ext_resource type="Texture2D" uid="uid://dphr4d2sy8skf" path="res://sprites/marker.png" id="2_bipew"]
-[ext_resource type="Texture2D" uid="uid://diog3p48voflg" path="res://sprites/ball_2.png" id="3_e8slv"]
+[ext_resource type="Texture2D" uid="uid://dphr4d2sy8skf" path="res://sprites/singles/marker.png" id="2_bipew"]
+[ext_resource type="Texture2D" uid="uid://diog3p48voflg" path="res://sprites/singles/ball_2.png" id="3_e8slv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_um8q7"]
 animations = [{
@@ -52,7 +52,7 @@ script = ExtResource("1_e8y10")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_um8q7")
-animation = &"still"
+animation = &"moving"
 autoplay = "still"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]

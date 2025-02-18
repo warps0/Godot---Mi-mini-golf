@@ -28,7 +28,7 @@ const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
 @onready var level_entered: Timer = $LevelEntered
 
 # JUST FOR TESTING LEVELS DELETE LATER
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_down"):
 		get_tree().reload_current_scene()
 
@@ -121,3 +121,13 @@ func _on_water_body_entered(body: Node2D) -> void:
 		
 		water_splash.hide()
 		ball.respawn()
+
+
+func _on_ice_body_entered(body: Node2D) -> void:
+	if body == ball:
+		ball.set_custom_friction(-1500)
+
+
+func _on_ice_body_exited(body: Node2D) -> void:
+	if body == ball:
+		ball.set_custom_friction(0)
