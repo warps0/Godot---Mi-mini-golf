@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmt2rx0eosgc6"
-path="res://.godot/imported/grass_sand_corner.png-03ad28186f739f7b8009ec9e5d07a0b2.ctex"
+uid="uid://diog3p48voflg"
+path="res://.godot/imported/ball_2.png-7d203e9c9fbdb83660449a1f063ba1ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/grass_sand_corner.png"
-dest_files=["res://.godot/imported/grass_sand_corner.png-03ad28186f739f7b8009ec9e5d07a0b2.ctex"]
+source_file="res://sprites/singles/ball_2.png"
+dest_files=["res://.godot/imported/ball_2.png-7d203e9c9fbdb83660449a1f063ba1ae.ctex"]
 
 [params]
 

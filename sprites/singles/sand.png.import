@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8667xym2qxdk"
-path="res://.godot/imported/_marker.png-bc02867466dadfa11926bcc47a163d2c.ctex"
+uid="uid://bovatepgnkdiq"
+path="res://.godot/imported/sand.png-2d82643c35cb90f633c4e7fdf9dc9902.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/_marker.png"
-dest_files=["res://.godot/imported/_marker.png-bc02867466dadfa11926bcc47a163d2c.ctex"]
+source_file="res://sprites/singles/sand.png"
+dest_files=["res://.godot/imported/sand.png-2d82643c35cb90f633c4e7fdf9dc9902.ctex"]
 
 [params]
 

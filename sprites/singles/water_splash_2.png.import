@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biyi02xjeirme"
-path="res://.godot/imported/outside_corner.png-69d239d51e2cc30b337db16a5edfb0e8.ctex"
+uid="uid://w1cdgpv88xv0"
+path="res://.godot/imported/water_splash_2.png-4e54525c7c8e369a7f70f4e1905daf67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/outside_corner.png"
-dest_files=["res://.godot/imported/outside_corner.png-69d239d51e2cc30b337db16a5edfb0e8.ctex"]
+source_file="res://sprites/singles/water_splash_2.png"
+dest_files=["res://.godot/imported/water_splash_2.png-4e54525c7c8e369a7f70f4e1905daf67.ctex"]
 
 [params]
 

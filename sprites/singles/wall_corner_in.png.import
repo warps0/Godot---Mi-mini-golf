@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5l2xj3veah7b"
-path="res://.godot/imported/water_splash_5.png-f38952d6f0cd545ab041e4914bef0364.ctex"
+uid="uid://cjigot88ru0y"
+path="res://.godot/imported/wall_corner_in.png-9681fca304fc81072f54ecee813ea09a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/water_splash_5.png"
-dest_files=["res://.godot/imported/water_splash_5.png-f38952d6f0cd545ab041e4914bef0364.ctex"]
+source_file="res://sprites/singles/wall_corner_in.png"
+dest_files=["res://.godot/imported/wall_corner_in.png-9681fca304fc81072f54ecee813ea09a.ctex"]
 
 [params]
 
