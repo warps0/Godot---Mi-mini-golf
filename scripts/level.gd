@@ -12,6 +12,7 @@ var playing: bool = true
 @export var par: int
 var start_time
 var total_time
+var hitted = false
 
 const SCORE_SOUND = preload("res://sfx/score.ogg")
 const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
@@ -43,10 +44,12 @@ func _ready() -> void:
 	await level_entered.timeout
 	
 	ball.unpause()
-	start_time = Time.get_ticks_msec()
 
 
 func handle_hit(sound) -> void:
+	if !hitted:
+		start_time = Time.get_ticks_msec()
+		hitted = true
 	play_sound(sound)
 	check_score()
 
