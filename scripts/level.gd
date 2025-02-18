@@ -26,6 +26,11 @@ const WATER_SPLASH = preload("res://sfx/water_splash.mp3")
 @onready var respawn_timer: Timer = $RespawnTimer
 @onready var level_entered: Timer = $LevelEntered
 
+# JUST FOR TESTING LEVELS DELETE LATER
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_down"):
+		get_tree().reload_current_scene()
+
 
 func _ready() -> void:
 	ball.connect("ball_stopped", check_score)
